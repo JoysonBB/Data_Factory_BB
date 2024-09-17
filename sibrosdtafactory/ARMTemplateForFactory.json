@@ -100,8 +100,6 @@
 					{
 						"name": "DBC Api - DataLake",
 						"type": "Copy",
-						"state": "Inactive",
-						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [
 							{
 								"activity": "Api Calling - DataLake",
