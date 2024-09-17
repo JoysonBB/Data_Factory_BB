@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "sibrosdtafactory"
+		},
+		"AzureDataLakeStorage4_accountKey": {
+			"value": ""
+		},
+		"AzureDatabricks1_accessToken": {
+			"value": ""
+		},
+		"AzureDataLakeStorage4_properties_typeProperties_url": {
+			"value": "https://sibrosdemorawdata.dfs.core.windows.net/"
+		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"value": "0909-111619-fllve25s"
+		},
+		"DBC_http_properties_typeProperties_url": {
+			"value": "@{linkedService().baseUrl_DBC}"
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"value": "@{linkedService().baseurl}"
+		},
+		"HttpServer2_properties_typeProperties_url": {
+			"value": "@{linkedService().baseURL}"
+		}
+	}
+}
