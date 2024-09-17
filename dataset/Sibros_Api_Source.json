@@ -1,0 +1,28 @@
+{
+	"name": "Sibros_Api_Source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HttpServer2",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"baseURL": {
+					"value": "@dataset().demodatasetparam",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"demodatasetparam": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
