@@ -1,0 +1,158 @@
+{
+	"name": "Sibros_Data_Pipeline_Parent",
+	"properties": {
+		"activities": [
+			{
+				"name": "Mf4_Api_1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "GET",
+					"headers": {
+						"X-Master-Api-Key": "ecb2467c978bfd10",
+						"X-Master-Api-Secret": "d06e6e11addce23aa4779f2002bde7"
+					},
+					"url": {
+						"value": "https://api.prod-p-ap.sibros.tech/company/468df435-c8da-4013-bc62-14f5e69b6f70/core/v2/device-logs?isSibrosGenerated=true&startTime=@{formatDateTime(addDays(utcnow(),-1))}&endTime=@{formatDateTime(utcnow())}&limit=20&offset=0&logRuleNamePattern=",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Mf4_Api_2",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Mf4_Api_1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "DBC_Api",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"X-Master-Api-Key": "ecb2467c978bfd10",
+						"X-Master-Api-Secret": "d06e6e11addce23aa4779f2002bde7"
+					},
+					"url": "https://api.prod-p-ap.sibros.tech/core/v2/converted-files",
+					"body": {
+						"value": "{\n    \"deviceLogIDs\": [ \"@{activity('Mf4_Api_1').output.results[0].deviceLogID}\" ],\n    \"sourceFileFormat\": \"SIBROS\",\n    \"targetFileFormat\": \"MDF\"\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Mf4_URL",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Mf4_Api_2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "test",
+					"value": {
+						"value": "@activity('Mf4_Api_2').output.file.downloadURL",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Execute Child Pipeline",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Mf4_URL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Sibros_Data_Pipeline_Child",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"paramDownloadURL": {
+							"value": "@variables('test')",
+							"type": "Expression"
+						},
+						"DBC_Url": {
+							"value": "@activity('DBC_Api').output.decoderFiles[0].downloadURL",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "DBC_Api",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "GET",
+					"headers": {
+						"X-Master-Api-Key": "ecb2467c978bfd10",
+						"X-Master-Api-Secret": "d06e6e11addce23aa4779f2002bde7"
+					},
+					"url": "https://api.prod-p-ap.sibros.tech/company/468df435-c8da-4013-bc62-14f5e69b6f70/core/v2/decodermappings/b8850fed-53d2-4973-a661-c414debb24a1"
+				}
+			}
+		],
+		"variables": {
+			"test": {
+				"type": "String"
+			},
+			"validate": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-09-16T07:35:35Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

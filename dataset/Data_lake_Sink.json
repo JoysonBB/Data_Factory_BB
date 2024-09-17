@@ -1,0 +1,19 @@
+{
+	"name": "Data_lake_Sink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage4",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "rawdata",
+				"fileSystem": "sibrosdatalake"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

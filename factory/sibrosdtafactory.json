@@ -1,0 +1,9 @@
+{
+	"name": "sibrosdtafactory",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "e526bd85-0245-4da8-b1e9-d57c0566dbac",
+		"tenantId": "2771cf1c-6046-4140-b5eb-779adb5c72fa"
+	}
+}
