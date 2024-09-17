@@ -1,0 +1,28 @@
+{
+	"name": "Sibros_DBC_Api",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DBC_http",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"baseUrl_DBC": {
+					"value": "@dataset().url_parameter",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"url_parameter": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
