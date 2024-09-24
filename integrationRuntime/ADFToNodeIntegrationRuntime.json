@@ -1,0 +1,6 @@
+{
+	"name": "ADFToNodeIntegrationRuntime",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
