@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "http://localhost:4000/api/items",
+			"url": "http://192.168.1.129:4000/api/items",
 			"enableServerCertificateValidation": false,
 			"authenticationType": "Anonymous"
 		},
