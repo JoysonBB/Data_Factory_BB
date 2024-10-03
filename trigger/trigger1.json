@@ -1,0 +1,24 @@
+{
+	"name": "trigger1",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Sibros_Data_Pipeline_Child",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/sibrosdatalake/blobs/start",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/ac8aa1ee-5a19-4f5e-a28d-e94b545013f9/resourceGroups/RG_Common/providers/Microsoft.Storage/storageAccounts/sibrosdemorawdata",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
