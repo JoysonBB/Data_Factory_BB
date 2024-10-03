@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "rawdata",
+				"folderPath": "pipeline_flow",
 				"fileSystem": "sibrosdatalake"
 			}
 		}
