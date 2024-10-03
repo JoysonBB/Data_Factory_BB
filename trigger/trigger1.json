@@ -9,6 +9,12 @@
 					"referenceName": "Sibros_Data_Pipeline_Child",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Sibros_Data_Pipeline_Parent",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "BlobEventsTrigger",
